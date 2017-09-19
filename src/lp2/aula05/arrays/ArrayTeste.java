@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package lp2.aula05.arrays;
-
 /**
  *
  * @author cayque
@@ -28,4 +27,3 @@ public class ArrayTeste {
         vet.resultado();
     }
 }
-
