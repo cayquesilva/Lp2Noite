@@ -1,4 +1,5 @@
-package lp2.aula07.polimorfismo;
+package lp2.aula08.classeabstrata;
+
 /**
  *
  * @author Cayque
@@ -17,7 +18,7 @@ public class ClasseTeste {
         System.out.println("Cpf: "+g1.getCpf());
         System.out.println("Salario: "+g1.getSalario());
         System.out.println("Senha: "+g1.getSenha());
-        System.out.println("Autenticando: "+g1.autenticar(159658));
+        System.out.println("Autenticando: "+g1.autentica(159658));
         
         ControleDeBonificacoes controle = new ControleDeBonificacoes();
         Gerente gerente = new Gerente("Marcos Paulo");

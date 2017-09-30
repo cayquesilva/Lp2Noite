@@ -1,9 +1,9 @@
-package lp2.aula07.polimorfismo;
+package lp2.aula08.classeabstrata;
 /**
  *
  * @author Cayque
  */
-public class Gerente extends Funcionario{
+public class Gerente extends Funcionario implements Autenticavel{
     private int senha;
 
     public Gerente (String nome){
@@ -23,8 +23,10 @@ public class Gerente extends Funcionario{
         return super.getBonificacao()+1000; //o salario do gerente te bonus +1000 além da porcentagem"bonus" 
     }
     
-    public boolean autenticar(int senha){
-        if(this.senha == senha){
+
+    @Override
+    public boolean autentica(int senha) {
+       if(this.senha == senha){
             System.out.println("Acesso Permitido!");
             return true;
         }else{

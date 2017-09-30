@@ -1,4 +1,4 @@
-package lp2.aula07.polimorfismo;
+package lp2.aula08.classeabstrata;
 /**
  *
  * @author Cayque
