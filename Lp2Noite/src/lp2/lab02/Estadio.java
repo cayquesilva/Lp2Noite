@@ -10,7 +10,7 @@ public class Estadio {
     
     
 
-    public Clube[] getTimes() { //é um vetor, retorna endereço de memoria. não imprime
+        public Clube[] getTimes() { //é um vetor, retorna endereço de memoria. não imprime
         return times; // direto, tem que tratar a impressão em tela.
     }
 

@@ -3,7 +3,6 @@ package lp2.lab02;
 // adicionar jogadores
 
 import java.util.Scanner;
-
 // adicionar comissao tecnicas e funcionarios
 // criar arbitros
 // criar partidas
@@ -19,22 +18,36 @@ public class TesteTimes {
 
         }
     }
+    
+    public static void imprimeTime(Clube[] clube,int auxiliar){
+        for (int i = 0;i<auxiliar;i++){
+            System.out.println("Digite "+i+" para adicionar "+clube[i].getNome());
+        }
+    }
+    
+    public static void imprimeEstadio(Estadio[] e,int auxiliar) {
+        for (int i = 0; i < auxiliar; i++) {
+            System.out.println("Digite "+i+" para adicionar ao "+e[i].getNome());
+
+        }
+    }
 
    
     public static void main(String args[]) {
         String op,auxiliar;
         Scanner s = new Scanner(System.in);
-        int i=0,j=0,aux=0;
+        int i=0,j=0,aux=0,aux1,aux2,quantTime=0;
         Clube time[] = new Clube[6];
-        Estadio e[] = new Estadio[2];
+        Estadio est[] = new Estadio[2];
               
         do{
             System.out.println("*--------------------------------------------------------*");
             System.out.println("*--------------------------------------------------------*");
             System.out.println("*--------------- Selecione a opção desejada -------------*");
             System.out.println("*--------------      DIGITE A PALAVRA      --------------*");
-            System.out.println("*-------- [ CLUBE ]  para criar um clube   --------------*");
+            System.out.println("*-------- [ CLUBE ]  para criar os clubes  --------------*");
             System.out.println("*-------- [ ESTADIO ] para criar um estádio -------------*");
+            System.out.println("*-------- [ VINCULAR ] para vincular um time a um estádio*");
             System.out.println("*-------- [ PARTIDA ] para criar uma partida ------------*");
             System.out.println("*-------- [ JOGADOR ] para criar um jogador -------------*");
             System.out.println("*-------- [ ARBITRO ] para criar um arbitro -------------*");
@@ -43,49 +56,60 @@ public class TesteTimes {
             System.out.println("*--------------------------------------------------------*");
             System.out.println("*--------------------------------------------------------*");
             op= s.nextLine();
-            System.out.println(i);
             switch(op){
             
                 case "clube":
-                time[i] = new Clube();
-                System.out.println("Digite o nome do clube: ");
-                time[i].setNome(s.nextLine());
-                System.out.println("Digite o estado do clube: ");
-                time[i].setEstado(s.nextLine());
-                System.out.println("Digite a cidade do clube: ");
-                time[i].setCidade(s.nextLine());
-                i++;
+                    //for(int j=0;j<6;j++){
+                    do{ // para repetir o codigo enquanto eu disser que quero adicionar mais um clube. Maximo de clubes 6
+                    if(j<6){ 
+                        System.out.println("Digite o nome do "+(j+1)+"º clube");//, cidade e estado do "+i+ "º clube");
+                        time[j] = new Clube();
+                        time[j].setNome(s.nextLine());
+                        //time[i].setCidade(s.nextLine());
+                        //time[i].setEstado(s.nextLine());
+                        quantTime++;
+                        j++;
+                        System.out.println("Deseja adicionar outro clube? SIM ou Nao?");
+                        auxiliar=s.nextLine();
+                        }else{
+                            System.out.println("Você já digitou o numero máximo de clubes!");
+                            break;
+                        }
+                    }while(auxiliar.equals("sim"));
+                    
                 break;
                 
                 case "estadio":
-                e[j] = new Estadio();
-                time[i] = new Clube();
-                System.out.println("Digite o nome do estadio: ");
-                e[j].setNome(s.nextLine());
-                System.out.println("Digite o estado do estadio: ");
-                e[j].setEstado(s.nextLine());
-                System.out.println("Digite a cidade do estadio: ");
-                e[j].setCidade(s.nextLine());
+                    do{
+                    if(i<2){
+                    System.out.println("Digite o nome do estadio");
+                    est[i] = new Estadio();
+                    est[i].setNome(s.nextLine());
+                    //est[i].setCidade("Campina");
+                    //est[i].setEstado("PB");
+                    aux++;
+                    i++;
+                    System.out.println("Deseja adicionar outro estadio? Sim ou Não?");
+                    auxiliar=s.nextLine();
+                    }else{
+                        System.out.println("Você já criou os 2 estádios.");
+                        break;
+                    }
+                    }while(auxiliar.equals("sim"));
+                break;
                 
-                System.out.println("Deseja adicionar um time nesse estadio? SIM ou NAO");
-                op = s.nextLine();
-                while(op.equals("sim")){
-                    System.out.println("Digite o nome do time que você deseja adicionar a esse estádio: ");
-                    auxiliar = s.nextLine();
-                    for(i=0;i<6;i++){
-                        System.out.println(i);
-                        if(time[i].getNome().equals(auxiliar)){
-                            e[j].setTimes(time[i]);
-                            aux++;
-                        }else{
-                            aux=0;
+                case "vincular":
+                    System.out.println("Qual o estádio que você deseja adicionar times?");
+                    imprimeEstadio(est,aux);
+                    aux1=s.nextInt();
+                    for(i=0;i<aux;i++){
+                        if(i==aux1){
+                            System.out.println("Escolha o time que você deseja adicionar ao estádio");
+                            imprimeTime(time,quantTime);
+                            aux2=s.nextInt();
+                            est[aux1].setTimes(time[aux2]);
                         }
                     }
-                    System.out.println("Esse time não existe ou o estádio já possui 4 times");
-                    System.out.println("Deseja tentar novamente? SIM ou NAO");
-                    op = s.nextLine();
-                }
-                break;
         }
         }while(!"sair".equals(op));
         
