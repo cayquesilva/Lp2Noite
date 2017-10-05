@@ -22,11 +22,12 @@ public class TesteTimes {
 
    
     public static void main(String args[]) {
-        String op;
+        String op,auxiliar;
         Scanner s = new Scanner(System.in);
-        Clube time = new Clube();
-        Estadio e1 = new Estadio();
-        
+        int i=0,j=0,aux=0;
+        Clube time[] = new Clube[6];
+        Estadio e[] = new Estadio[2];
+              
         do{
             System.out.println("*--------------------------------------------------------*");
             System.out.println("*--------------------------------------------------------*");
@@ -42,74 +43,53 @@ public class TesteTimes {
             System.out.println("*--------------------------------------------------------*");
             System.out.println("*--------------------------------------------------------*");
             op= s.nextLine();
+            System.out.println(i);
             switch(op){
-            case "clube":
+            
+                case "clube":
+                time[i] = new Clube();
                 System.out.println("Digite o nome do clube: ");
-                time.setNome(s.nextLine());
+                time[i].setNome(s.nextLine());
                 System.out.println("Digite o estado do clube: ");
-                time.setEstado(s.nextLine());
+                time[i].setEstado(s.nextLine());
                 System.out.println("Digite a cidade do clube: ");
-                time.setCidade(s.nextLine());
+                time[i].setCidade(s.nextLine());
+                i++;
                 break;
                 
-            case "estadio":
+                case "estadio":
+                e[j] = new Estadio();
+                time[i] = new Clube();
                 System.out.println("Digite o nome do estadio: ");
-                e1.setNome(s.nextLine());
+                e[j].setNome(s.nextLine());
                 System.out.println("Digite o estado do estadio: ");
-                e1.setEstado(s.nextLine());
+                e[j].setEstado(s.nextLine());
                 System.out.println("Digite a cidade do estadio: ");
-                e1.setCidade(s.nextLine());
+                e[j].setCidade(s.nextLine());
+                
                 System.out.println("Deseja adicionar um time nesse estadio? SIM ou NAO");
                 op = s.nextLine();
-                if("sim".equals(op)){
-                   
+                while(op.equals("sim")){
+                    System.out.println("Digite o nome do time que você deseja adicionar a esse estádio: ");
+                    auxiliar = s.nextLine();
+                    for(i=0;i<6;i++){
+                        System.out.println(i);
+                        if(time[i].getNome().equals(auxiliar)){
+                            e[j].setTimes(time[i]);
+                            aux++;
+                        }else{
+                            aux=0;
+                        }
+                    }
+                    System.out.println("Esse time não existe ou o estádio já possui 4 times");
+                    System.out.println("Deseja tentar novamente? SIM ou NAO");
+                    op = s.nextLine();
                 }
                 break;
         }
-            System.out.println(time.getNome());
         }while(!"sair".equals(op));
         
         
-            
-          
-
-        
-     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-/*        
-        Clube time1 = new Clube();
-        Clube time2 = new Clube();
-        Clube time3 = new Clube();
-
-        time1.setNome("Flamengo");
-        time2.setNome("Fluminense");
-        time3.setNome("Sao Paulo");
-
-        Estadio e1 = new Estadio();
-        Estadio e2 = new Estadio();
-
-        e1.setNome("Maracana");
-        e1.setTimes(time1);
-        e1.setTimes(time2);
-        e2.setNome("Morumbi");
-        e2.setTimes(time3);
-
-        System.out.println("Estadio: " + e1.getNome());
-        imprimeTimeEstadio(e1);
-
-        System.out.println("Estadio: " + e2.getNome());
-        imprimeTimeEstadio(e2);
-
-*/
     }
     
 }
