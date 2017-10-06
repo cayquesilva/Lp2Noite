@@ -1,22 +1,24 @@
 package lp2.lab02;
 // criar 6 times
 // adicionar jogadores
-
-import java.util.Scanner;
 // adicionar comissao tecnicas e funcionarios
 // criar arbitros
 // criar partidas
 // criar estadios
 // ver partidas
 // etc etc etc
+import java.util.Scanner;
 
 public class TesteTimes {
     
     public static void imprimeTimeEstadio(Estadio e) {
+        if(e.getQuantideTimes()>0){
         for (int i = 0; i < e.getQuantideTimes(); i++) {
             System.out.println("Clube: " + e.getTimes()[i].getNome());
-
-        }
+            }
+        }else{
+                System.out.println("Não existem times nesse estádio.");
+            }
     }
     
     public static void imprimeJogadorTime(Jogador[] j,Clube[] c,int a) {
@@ -30,15 +32,33 @@ public class TesteTimes {
     
     
     public static void imprimeTime(Clube[] clube,int auxiliar){
-        for (int i = 0;i<auxiliar;i++){
-            System.out.println("Digite "+i+" para adicionar "+clube[i].getNome());
+        if(auxiliar>0){
+            for (int i = 0;i<auxiliar;i++){
+                System.out.println("Digite "+i+" para adicionar "+clube[i].getNome());
+                }
+        }else{
+            System.out.println("Não existem times para serem selecionados!");
         }
     }
     
     public static void imprimeEstadio(Estadio[] e,int auxiliar) {
+        if(auxiliar>0){
         for (int i = 0; i < auxiliar; i++) {
             System.out.println("Digite "+i+" para adicionar ao "+e[i].getNome());
 
+        }
+    }else{
+            System.out.println("Não existem estádios cadastrados!");
+        }
+    }
+    
+    public static void imprimeArbitro(Arbitro[] e,int auxiliar) {
+        if(auxiliar>0){
+        for (int i = 0; i < auxiliar; i++) {
+            System.out.println("Digite "+i+" para selecionar "+e[i].getNome());
+        }
+    }else{
+            System.out.println("Não existem árbitros cadastrados!");
         }
     }
 
@@ -46,11 +66,13 @@ public class TesteTimes {
     public static void main(String args[]) {
         String op,auxiliar;
         Scanner s = new Scanner(System.in);
-        int i=0,j=0,p=0,aux=0,aux1,aux2,quantTime=0,quantJogador=0;
+        int i=0,j=0,p,aux=0,aux1,aux2,quantTime=0,quantArbitro=0;
         Clube time[] = new Clube[6];
         Estadio est[] = new Estadio[2];
         Jogador jogador[] = new Jogador[20];
         Arbitro juiz[] = new Arbitro[5];
+        Partida jogo[] = new Partida[3];
+        ComissaoTecnica comissao[] = new ComissaoTecnica[5];
               
         do{
             System.out.println("*--------------------------------------------------------*");
@@ -79,6 +101,7 @@ public class TesteTimes {
                         time[j].setNome(s.nextLine());
                         //time[i].setCidade(s.nextLine());
                         //time[i].setEstado(s.nextLine());
+                        quantTime++;
                         j++;
                         System.out.println("Deseja adicionar outro clube? SIM ou Nao?");
                         auxiliar=s.nextLine();
@@ -98,6 +121,7 @@ public class TesteTimes {
                     est[i].setNome(s.nextLine());
                     //est[i].setCidade("Campina");
                     //est[i].setEstado("PB");
+                    aux++;
                     i++;
                     System.out.println("Deseja adicionar outro estadio? Sim ou Não?");
                     auxiliar=s.nextLine();
@@ -110,13 +134,13 @@ public class TesteTimes {
                 
                 case "vincular":
                     System.out.println("Qual o estádio que você deseja adicionar times?");
-                    imprimeEstadio(est,est.length);
+                    imprimeEstadio(est,aux);
                     aux1=s.nextInt();
                     s.nextLine();
-                    for(i=0;i<est.length;i++){
+                    for(i=0;i<aux;i++){
                         if(i==aux1){
                             System.out.println("Escolha o time que você deseja adicionar ao estádio");
-                            imprimeTime(time,time.length);
+                            imprimeTime(time,quantTime);
                             aux2=s.nextInt();
                             s.nextLine();
                             est[aux1].setTimes(time[aux2]);
@@ -136,10 +160,10 @@ public class TesteTimes {
                         //jogador[i].setEstado(s.nextLine());
                         //quantJogador++;
                         System.out.println("Deseja adicionar esse jogador em qual time?");
-                        imprimeTime(time,time.length);
+                        imprimeTime(time,quantTime);
                         aux1=s.nextInt();
                         s.nextLine();
-                        for(i=0;i<time.length;i++){
+                        for(i=0;i<quantTime;i++){
                             if(i==aux1){
                                 time[i].setFuncionario(jogador[p]);
                             }
@@ -161,32 +185,83 @@ public class TesteTimes {
                         System.out.println("Digite o nome do "+(p+1)+"º arbitro");
                         juiz[p] = new Arbitro();
                         juiz[p].setNome(s.nextLine());
-                        //jogador[p].setCidade(s.nextLine());
-                        //jogador[p].setEstado(s.nextLine());
-                        //quantJogador++;
-                        System.out.println("Deseja adicionar esse arbitro em em qual partida?");
-                        imprimeTime(time,time.length);
-                        aux1=s.nextInt();
-                        s.nextLine();
-                        for(i=0;i<time.length;i++){
-                            if(i==aux1){
-                                time[i].setFuncionario(jogador[p]);
-                            }
-                        }
                         p++;
-                        System.out.println("Deseja adicionar outro jogador? SIM ou Nao?");
+                        quantArbitro++;
+                        System.out.println("Deseja adicionar outro arbitro? SIM ou Nao?");
                         auxiliar=s.nextLine();
                         }else{
-                            System.out.println("Você já digitou o numero máximo de jogadores!");
+                            System.out.println("Você já digitou o numero máximo de arbitros!");
                             break;
                         }
                     }while(auxiliar.equals("sim"));
                 break;
+                
+                case "partida":
+                    p=0;
+                    do{
+                        if(p<3){
+                            jogo[p] = new Partida();
+                            System.out.println("Escolha o time mandante");
+                            imprimeTime(time,quantTime);
+                            aux2=s.nextInt();
+                            s.nextLine();
+                            jogo[p].setMandante(time[aux2]);
+                            System.out.println("Escolha o time visitante");
+                            imprimeTime(time,quantTime);
+                            aux2=s.nextInt();
+                            s.nextLine();
+                            jogo[p].setVisitante(time[aux2]);
+                            System.out.println("Escolha o arbitro para a partida.");
+                            imprimeArbitro(juiz,quantArbitro);
+                            aux2=s.nextInt();
+                            s.nextLine();
+                            for(i=0;i<quantArbitro;i++){
+                                if(i==aux2){
+                                    jogo[p].setJuizes(juiz[i]);
+                                }
+                            }
+                            
+                            p++;
+                            System.out.println("Você deseja criar outra partida? SIM ou NAO?");
+                            auxiliar=s.nextLine();
+                                }else{
+                                    System.out.println("Não podemos mais criar partidas!");
+                                break;
+                                }
+                    }while(auxiliar.equals("sim"));
+                break;
+                        
+                case "funcionario":
+                    p=0;
+                    do{
+                        if(p<5){
+                            
+                            System.out.println("Digite o nome do funcionario");
+                            comissao[p] = new ComissaoTecnica();
+                            comissao[p].setNome(s.nextLine());
+                            System.out.println("Deseja adicionar esse funcionario em qual time?");
+                            imprimeTime(time,quantTime);
+                            aux1=s.nextInt();
+                            s.nextLine();
+                            for(i=0;i<quantTime;i++){
+                                if(i==aux1){
+                                    time[i].setFuncionario(comissao[p]);
+                                }
+                            }
+                            p++;
+                            System.out.println("Você deseja cadastrar outro funcionario? SIM ou NAO?");
+                            auxiliar=s.nextLine();
+                                }else{
+                                    System.out.println("Não podemos mais criar partidas!");
+                                break;
+                                }
                     
-            }   
+                    
+                    }while(auxiliar.equals("sim"));
+                break;
+            
+            }  
+               
         }while(!"sair".equals(op));
-        
-        
     }
-    
 }
