@@ -1,5 +1,7 @@
 package lp2.aula09.trows;
 
+import java.util.InputMismatchException;
+
 public class Funcionario {
     
     private String nome,cpf;
@@ -43,13 +45,13 @@ public class Funcionario {
     
     
     public boolean validaCpf(String cpf){
-        if(cpf==null){
+       try{ if(cpf==null){
             return false;
         }else{
             String cpfNovo="";
             this.cpf=cpf;
             if(verTamanho(this.cpf)){
-                return true;
+                return false;
             }
             if(verIguais(this.cpf)){
                 return false;
@@ -61,6 +63,10 @@ public class Funcionario {
                 return false;
             }return true;
         }
+       }
+       catch(InputMismatchException erro){
+           return false;
+       }
     }
     
     private boolean verIguais(String cpf){
@@ -91,7 +97,7 @@ public class Funcionario {
     
     private boolean verTamanho(String cpf){
         if(cpf.length()!=11){
-            return false;
-        }return true;
+            return true;
+        }return false;
     }
 }

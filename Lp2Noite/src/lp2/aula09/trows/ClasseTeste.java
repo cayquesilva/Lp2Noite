@@ -28,7 +28,7 @@ public class ClasseTeste {
        
         
         System.out.println(controle.getTotalDeBonificacoes());
-        if(funcionario1.validaCpf(funcionario1.getCpf())){
+        if(g1.validaCpf(g1.getCpf())){
             System.out.println("Validado");
         }else{
             System.out.println("Invalido");
