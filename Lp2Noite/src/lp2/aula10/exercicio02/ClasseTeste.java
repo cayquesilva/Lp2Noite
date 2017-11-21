@@ -24,6 +24,7 @@ public class ClasseTeste {
         System.out.println("A quantidade de vogais é:"+c1.getVogais(c1.getString()));
         System.out.println("A quantidade de digitos é: "+c1.getDigitos(c1.getString()));
         System.out.println("A string é palindroma? "+c1.isPalindrome(c1.getString()));
+        c1.removeEspaco(c1.getString());
     }
 
     

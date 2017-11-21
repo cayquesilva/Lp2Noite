@@ -2,7 +2,7 @@ package lp2.aula10.exercicio02;
 
 public class Controle {
     
-    private String s;
+    private String s,aux;
     private char flag;
     private int caracteres;
     private int palavras, vogais=0, digitos=0;
@@ -28,6 +28,13 @@ public class Controle {
         dividido=s.split(" ");
         palavras=dividido.length;
         return palavras;
+    }
+    
+    public void removeEspaco(String s){
+        for(int i=0;i<4;i++){
+            aux=s.replaceAll("  "," ");
+        }
+        System.out.println("A string corrigida é: "+aux);
     }
    
     public boolean isPalindrome(String s){
