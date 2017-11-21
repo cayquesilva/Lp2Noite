@@ -31,15 +31,14 @@ public class Controle {
     }
    
     public boolean isPalindrome(String s){
-        for(int i=0;i<s.length();i++){
-            for(int j=s.length()-1;j>=0;j--){
+        for(int i=0, j=(s.length()-1);i<s.length()&&j>=0;i++,j--){
                 if(s.charAt(i)==s.charAt(j)){
                     palindrome=true;
                 }else{
                     palindrome=false;
+                    return palindrome;
                 }
             }
-        }
         return palindrome;
     }
     
